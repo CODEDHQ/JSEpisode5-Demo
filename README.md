@@ -18,7 +18,7 @@ obj.incrementCounter(5); // returns 6
 
 ---
 
-### Code Blocks (this)
+### Code Blocks (`this`)
 
 BLOCK 01 (THIS - WRONG)
 
@@ -41,6 +41,22 @@ let instructor = {
 ---
 
 ### Code Blocks (Classes)
+
+BLOCK 00 (INTUITION)
+
+Why is it bad to create the same kind of object manually?
+Time-consuming, error-prone
+
+```javascript
+const instructorHamsa = {
+  name: "Hamsa Makia",
+  ...
+}
+
+const instructorFawas = {
+  name: "Fawas Almutairi",
+}
+```
 
 BLOCK 01 (CLASS - EMPTY)
 
@@ -92,7 +108,7 @@ class Instructor {
 
   teach() {
     this.awesomePoints++;
-    return this.courses.map(course => `I teach ${course}`).join("\n");
+    console.log(this.courses.map(course => `I teach ${course}`).join("\n"));
   }
 }
 
@@ -144,6 +160,9 @@ class Instructor extends Person {
     this.subjects = subjects;
     this.awesomePoints = 0;
   }
+
+  // Methods
+  ...
 }
 ```
 
