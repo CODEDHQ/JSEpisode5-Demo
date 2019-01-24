@@ -10,7 +10,9 @@ BLOCK 01 (OBJECT METHODS)
 
 ```javascript
 let obj = {
-  incrementCounter: counter => counter++
+  incrementCounter: function(counter) {
+    return counter++;
+  }  
 };
 
 obj.incrementCounter(5); // returns 6
@@ -25,7 +27,9 @@ BLOCK 01 (THIS - WRONG)
 ```javascript
 let instructor = {
   name: "Asis",
-  sayHello: () => console.log(`Hi, I'm ${name}`)
+  sayHello: function() {
+    console.log(`Hi, I'm ${name}`);
+  }
 };
 ```
 
@@ -34,7 +38,9 @@ BLOCK 02 (THIS - RIGHT)
 ```javascript
 let instructor = {
   name: "Asis",
-  sayHello: () => console.log(`Hi, I'm ${this.name}`)
+  sayHello: function() {
+    console.log(`Hi, I'm ${this.name}`);
+  }
 };
 ```
 
@@ -61,121 +67,141 @@ const instructorFawas = {
 BLOCK 01 (CLASS - EMPTY)
 
 ```javascript
+class Instructor {}
+```
+
+You can create a new object from this class by using the `new` keyword:
+
+```javascript
+let instructor = new Instructor();
+```
+
+BLOCK 02 (CLASS - PROPERTIES)
+
+```javascript
 class Instructor {
-    ...
+  name = "Lailz";
+  courses = ["JavaScript", "React", "React Native"];
+  awesomePoints = 1000000;
 }
 ```
 
-BLOCK 02 (CLASS - W/CONSTRUCTOR)
+```javascript
+let instructor = new Instructor();
+console.log(instructor); // Instructor { name: 'Lailz', ... }
+```
+
+BLOCK 03 (CLASS - METHODS)
+
+```javascript
+class Instructor {
+  name = "Lailz";
+  courses = ["JavaScript", "React", "React Native"];
+  awesomePoints = 1000000;
+
+  sayHello = () => console.log(`Hi, I'm ${this.name}`);
+
+  addCourse = newCourse => this.courses.push(newCourse);
+
+  teach = () => {
+    this.awesomePoints++;
+    console.log(this.courses.map(course => `I teach ${course}`).join("\n"));
+  };
+}
+```
+
+```javascript
+let instructor = new Instructor();
+instructor.sayHello();
+...
+```
+
+BLOCK 04 (CLASS - CONSTRUCTOR)
+
+We still haven't solved the problem!
+What if there are more instructors than just Lailz?!
+How do we create many _different_ instructors from the same blueprint (class)?
 
 ```javascript
 class Instructor {
   constructor(firstName, lastName, courses) {
     this.name = `${firstName} ${lastName}`;
     this.courses = courses;
-    this.awesomePoints = 0;
   }
+
+  awesomePoints = 0;
+
+  ...
 }
 ```
 
-BLOCK 03 (CREATING OBJECT FROM CLASS)
-
 ```javascript
-let instructor = new Instructor("Asis", "Alsaffar", [
+let instructorAsis = new Instructor("Asis", "Alsaffar", [
   "JavaScript",
   "Node",
   "React"
 ]);
-```
-
-BLOCK 04 (WHOLE SHEBANG)
-
-```javascript
-class Instructor {
-  constructor(firstName, lastName, courses) {
-    this.name = `${firstName} ${lastName}`;
-    this.courses = courses;
-    this.awesomePoints = 0;
-  }
-
-  sayHello() {
-    console.log(`Hi, I'm ${this.name}`);
-  }
-
-  addCourse(newCourse) {
-    this.courses.push(newCourse);
-  }
-
-  teach() {
-    this.awesomePoints++;
-    console.log(this.courses.map(course => `I teach ${course}`).join("\n"));
-  }
-}
-
-let instructorHamsa = new Instructor("Hamsa", "Makia", ["Python", "Django"]);
+let instructorHamsa = new Instructor("Hamsa", "Darth", ["Python", "Django"]);
 let instructorFawas = new Instructor("Fawas", "Almutairi", [
   "React Native",
   "Hacking"
 ]);
 
+instructorAsis.sayHello(); // logs "Hi I'm Asis Alsaffar"
 instructorHamsa.sayHello(); // logs "Hi I'm Hamsa Makia"
 instructorFawas.sayHello(); // logs "Hi I'm Fawas Almutairi"
+...
 ```
 
 ---
 
 ### Code Blocks (Inheritance)
 
-BLOCK 01 (GENERIC STRUCTURE)
-
-```javascript
-class Child extends Parent {
-  constructor(initialValues) {
-    super(initialValues);
-  }
-}
-```
-
-BLOCK 02 (EXAMPLE - PARENT CLASS)
+BLOCK 01 (INHERITANCE - PARENT CLASS)
 
 ```javascript
 class Person {
-  constructor(firstName, lastName, age) {
+  constructor(firstName, lastName, age = 0) {
     this.name = `${firstName} ${lastName}`;
     this.age = age;
   }
 
-  greetings() {
-    console.log(`Hi! I'm ${this.name}`);
-  }
+  grow = () => this.age++;
+
+  sayHello = () => console.log(`Hi! I'm ${this.name}`);
 }
 ```
 
-BLOCK 03 (EXAMPLE - CHILD CLASS)
+BLOCK 02 (INHERITANCE - CHILD CLASS)
 
 ```javascript
 class Instructor extends Person {
-  constructor(firstName, lastName, age, subjects) {
+  constructor(firstName, lastName, subjects, age) {
     super(firstName, lastName, age);
     this.subjects = subjects;
-    this.awesomePoints = 0;
   }
+
+  awesomePoints = 0;
 
   // Methods
   ...
 }
 ```
 
-BLOCK 04 (EXAMPLE - USING CHILD CLASS)
+BLOCK 03 - (INHERITANCE - METHOD OVERRIDE)
 
 ```javascript
-let instructor = new Instructor("Asis", "Alsaffar", 32, [
-  "JavaScript",
-  "React",
-  "Node"
-]);
+class Instructor extends Person {
+  constructor(firstName, lastName, subjects, greeting="Hi", age) {
+    super(firstName, lastName, age);
+    this.subjects = subjects;
+    this.greeting = greeting;
+  }
 
-console.log(instructor); // logs {name: "Asis Alsaffar", age: 32, subjects: ["JavaScript", "React", "Node"], awesomePoints: 0}
+  awesomePoints = 0;
 
-instructor.greetings(); // logs "Hi! I'm Asis Alsaffar"
+  sayHello = () => console.log(`${this.greeting}! I'm ${this.name}`);
+
+  ...
+}
 ```
