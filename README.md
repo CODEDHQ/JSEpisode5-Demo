@@ -10,7 +10,9 @@ BLOCK 01 (OBJECT METHODS)
 
 ```javascript
 let obj = {
-  incrementCounter: counter => counter++
+  incrementCounter: function(counter) {
+    return counter++;
+  }  
 };
 
 obj.incrementCounter(5); // returns 6
@@ -25,7 +27,9 @@ BLOCK 01 (THIS - WRONG)
 ```javascript
 let instructor = {
   name: "Asis",
-  sayHello: () => console.log(`Hi, I'm ${name}`)
+  sayHello: function() {
+    console.log(`Hi, I'm ${name}`);
+  }
 };
 ```
 
@@ -34,7 +38,9 @@ BLOCK 02 (THIS - RIGHT)
 ```javascript
 let instructor = {
   name: "Asis",
-  sayHello: () => console.log(`Hi, I'm ${this.name}`)
+  sayHello: function() {
+    console.log(`Hi, I'm ${this.name}`);
+  }
 };
 ```
 
@@ -64,7 +70,7 @@ BLOCK 01 (CLASS - EMPTY)
 class Instructor {}
 ```
 
-You can create a new class by using the `new` keyword:
+You can create a new object from this class by using the `new` keyword:
 
 ```javascript
 let instructor = new Instructor();
@@ -160,7 +166,7 @@ class Person {
     this.age = age;
   }
 
-  grow = () => (this.age = this.age + 1);
+  grow = () => this.age++;
 
   sayHello = () => console.log(`Hi! I'm ${this.name}`);
 }
