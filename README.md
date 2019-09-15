@@ -9,10 +9,10 @@
 BLOCK 01 (OBJECT METHODS)
 
 ```javascript
-let obj = {
+const obj = {
   incrementCounter: function(counter) {
     return counter++;
-  }  
+  }
 };
 
 obj.incrementCounter(5); // returns 6
@@ -25,7 +25,7 @@ obj.incrementCounter(5); // returns 6
 BLOCK 01 (THIS - WRONG)
 
 ```javascript
-let instructor = {
+const instructor = {
   name: "Asis",
   sayHello: function() {
     console.log(`Hi, I'm ${name}`);
@@ -36,7 +36,7 @@ let instructor = {
 BLOCK 02 (THIS - RIGHT)
 
 ```javascript
-let instructor = {
+const instructor = {
   name: "Asis",
   sayHello: function() {
     console.log(`Hi, I'm ${this.name}`);
@@ -73,7 +73,7 @@ class Instructor {}
 You can create a new object from this class by using the `new` keyword:
 
 ```javascript
-let instructor = new Instructor();
+const instructor = new Instructor();
 ```
 
 BLOCK 02 (CLASS - PROPERTIES)
@@ -87,7 +87,7 @@ class Instructor {
 ```
 
 ```javascript
-let instructor = new Instructor();
+const instructor = new Instructor();
 console.log(instructor); // Instructor { name: 'Lailz', ... }
 ```
 
@@ -136,13 +136,13 @@ class Instructor {
 ```
 
 ```javascript
-let instructorAsis = new Instructor("Asis", "Alsaffar", [
+const instructorAsis = new Instructor("Asis", "Alsaffar", [
   "JavaScript",
   "Node",
   "React"
 ]);
-let instructorHamsa = new Instructor("Hamsa", "Darth", ["Python", "Django"]);
-let instructorFawas = new Instructor("Fawas", "Almutairi", [
+const instructorHamsa = new Instructor("Hamsa", "Darth", ["Python", "Django"]);
+const instructorFawas = new Instructor("Fawas", "Almutairi", [
   "React Native",
   "Hacking"
 ]);
@@ -192,7 +192,7 @@ BLOCK 03 - (INHERITANCE - METHOD OVERRIDE)
 
 ```javascript
 class Instructor extends Person {
-  constructor(firstName, lastName, subjects, greeting="Hi", age) {
+  constructor(firstName, lastName, subjects, age, greeting="Hi") {
     super(firstName, lastName, age);
     this.subjects = subjects;
     this.greeting = greeting;
