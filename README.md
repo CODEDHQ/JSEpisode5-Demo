@@ -13,7 +13,7 @@ BLOCK 01 (OBJECT METHODS)
 ```javascript
 const obj = {
   incrementCounter: function(counter) {
-    return counter++;
+    return counter + 1;
   }
 };
 
