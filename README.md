@@ -207,3 +207,11 @@ class Instructor extends Person {
   ...
 }
 ```
+
+---
+
+### NOTES
+
+- There is a known issue that affects some students when running the tests:
+
+  In `bareed.js`, switch `export { ... };` to `module.exports = { ... }`
